@@ -11,9 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class NoteBody extends Fragment {
-
-    static final String CURRENT_NOTE = "CURRENT_NOTE";
+public class NoteBody extends Fragment implements Config{
     Note note = null;
 
     @Override
@@ -39,6 +37,8 @@ public class NoteBody extends Fragment {
         if(arg != null) {
             note = arg.getParcelable(CURRENT_NOTE);
         }
+        if(note == null)
+            note = MainActivity.notes.getNote(0);
 
         TextView titleView = view.findViewById(R.id.note_title_view);
         titleView.setText(note.getTitle());

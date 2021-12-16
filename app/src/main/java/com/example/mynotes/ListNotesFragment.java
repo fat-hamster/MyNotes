@@ -1,5 +1,6 @@
 package com.example.mynotes;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,11 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ListNotesFragment extends Fragment {
-
-    private Notes notes = new Notes();
-    private int currentNote = 0;
-    public static String CURRENT_NOTE = "CURRENT_NOTE";
+public class ListNotesFragment extends Fragment implements Config{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,42 +25,56 @@ public class ListNotesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         if(savedInstanceState != null) {
-            currentNote = savedInstanceState.getInt(CURRENT_NOTE);
+            MainActivity.currentNote = savedInstanceState.getInt(CURRENT_NOTE);
         }
+
         initList(view);
     }
 
     private void initList(View view) {
-        for (int i = 0; i < 10; i++) {
-            int line = i + 1;
-            notes.add("Line " + line, "Основные причины подорожания ремонта машин – " +
-                    "это неизбежный рост цен на запчасти, а также на сами услуги.");
-        }
-
         LinearLayout linearLayout = view.findViewById(R.id.list_linear_layout);
-        for (int i = 0; i < notes.getSize(); i++) {
+        for (int i = 0; i < MainActivity.notes.getSize(); i++) {
             TextView tv = new TextView(getContext());
             tv.setTextSize(24);
-            tv.setText(notes.getTitle(i));
+            tv.setText(MainActivity.notes.getTitle(i));
             final int index = i;
-            tv.setOnClickListener(v -> noteDetails(index));
+            tv.setOnClickListener(v -> showNote(index));
             linearLayout.addView(tv);
+        }
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            noteLandDetails(MainActivity.currentNote);
+    }
+
+    private void showNote(int index) {
+        MainActivity.currentNote = index;
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            notePortDetails(index);
+        } else {
+            noteLandDetails(index);
         }
     }
 
-    private void noteDetails(int index) {
-        currentNote = index;
+    private void noteLandDetails(int index) {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.frame_land_body_notes, NoteBody.newInstance(MainActivity.notes.getNote(index)))
+                .commit();
+    }
+
+    private void notePortDetails(int index) {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .add(R.id.list_notes_fragment_container, NoteBody.newInstance(notes.getNote(index)))
+                .add(R.id.list_notes_fragment_container, NoteBody.newInstance(MainActivity.notes.getNote(index)))
                 .commit();
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt(CURRENT_NOTE, currentNote);
+        outState.putInt(CURRENT_NOTE, MainActivity.currentNote);
         super.onSaveInstanceState(outState);
     }
 }
