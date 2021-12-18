@@ -31,6 +31,8 @@ public class ListNotesFragment extends Fragment implements Config{
         }
 
         initList(view);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            noteLandDetails(MainActivity.currentNote);
     }
 
     private void initList(View view) {
@@ -43,24 +45,21 @@ public class ListNotesFragment extends Fragment implements Config{
             tv.setOnClickListener(v -> showNote(index));
             linearLayout.addView(tv);
         }
-
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-            noteLandDetails(MainActivity.currentNote);
     }
 
     private void showNote(int index) {
         MainActivity.currentNote = index;
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            notePortDetails(index);
-        } else {
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             noteLandDetails(index);
+        } else {
+            notePortDetails(index);
         }
     }
 
     private void noteLandDetails(int index) {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.frame_land_body_notes, NoteBody.newInstance(MainActivity.notes.getNote(index)))
+                .replace(R.id.frame_land_body_notes, NoteBody.newInstance(MainActivity.notes.getNote(index)))
                 .commit();
     }
 

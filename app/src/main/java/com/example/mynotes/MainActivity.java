@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.telecom.Conference;
-import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity implements Config{
-    public static Notes notes = new Notes();
-    public static int currentNote = 0;
+    static Notes notes = new Notes();
+    static int currentNote = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +19,13 @@ public class MainActivity extends AppCompatActivity implements Config{
         else
             currentNote = savedInstanceState.getInt(CURRENT_NOTE);
 
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            getSupportFragmentManager().popBackStack();
+
         getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.list_notes_fragment_container, new ListNotesFragment())
-                    .commit();
+                .beginTransaction()
+                .add(R.id.list_notes_fragment_container, new ListNotesFragment())
+                .commit();
     }
 
     @Override
