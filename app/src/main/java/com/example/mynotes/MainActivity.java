@@ -1,15 +1,22 @@
 package com.example.mynotes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SurfaceControl;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -34,10 +41,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        initToolBar();
         initButtonBack();
         initButtonMain();
         initButtonFavorite();
         initButtonSettings();
+    }
+
+    private void initToolBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_settings:
+                showFragment(new SettingsFragment());
+                return true;
+            case R.id.action_main:
+                showFragment(new MainFragment());
+                return true;
+            case R.id.action_favorite:
+                showFragment(new FavoriteFragment());
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem search = menu.findItem(R.id.action_search);
+        SearchView searchText = (SearchView)search.getActionView();
+        searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void initButtonBack() {
