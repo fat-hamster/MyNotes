@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/drawable/side_nav_bar.xml" value="0.2942708333333333" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout-land/activity_main.xml" value="0.22135416666666666" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/activity_main.xml" value="0.278125" />
-        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/content_main.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/app_bar_layout.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/fragment_favorite.xml" value="0.278125" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/fragment_main.xml" value="0.278125" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/fragment_settings.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/nav_header_layout.xml" value="0.278125" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/menu/main.xml" value="0.278125" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/menu/main_drawer.xml" value="0.278125" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/menu/main_fragment.xml" value="1.8857142857142857" />

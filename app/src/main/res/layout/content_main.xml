@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,28 +13,31 @@
 
         <Button
             android:id="@+id/buttonBack"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/back"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/back" />
+
         <Button
             android:id="@+id/buttonMain"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/main"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/main" />
+
         <Button
             android:id="@+id/buttonFavorite"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/favorite"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/favorite" />
+
         <Button
             android:id="@+id/buttonSettings"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/settings" />
 
     </LinearLayout>
 

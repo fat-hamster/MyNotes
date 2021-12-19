@@ -1,22 +1,25 @@
 package com.example.mynotes;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SurfaceControl;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
@@ -41,22 +44,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        initToolBar();
+        Toolbar toolbar = initToolBar();
+        initDrawer(toolbar);
         initButtonBack();
         initButtonMain();
         initButtonFavorite();
         initButtonSettings();
     }
 
-    private void initToolBar() {
+    private Toolbar initToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        return toolbar;
+    }
+
+    private void initDrawer(Toolbar toolbar) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if(navigateFragment(id)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+
+            return false;
+        });
     }
 
     @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
+    boolean navigateFragment(int id) {
         switch (id) {
             case R.id.action_settings:
                 showFragment(new SettingsFragment());
@@ -67,6 +91,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_favorite:
                 showFragment(new FavoriteFragment());
                 return true;
+        }
+        return false;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(navigateFragment(id)) {
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
