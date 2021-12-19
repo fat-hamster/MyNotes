@@ -9,7 +9,7 @@
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/app_bar_layout.xml" value="0.278125" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/fragment_favorite.xml" value="0.278125" />
-        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/fragment_main.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/fragment_main.xml" value="0.1" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/fragment_settings.xml" value="0.278125" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/nav_header_layout.xml" value="0.278125" />
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/menu/main.xml" value="0.278125" />
@@ -23,5 +23,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.278125" />
+      </ProjectState>
+    </option>
   </component>
 </project>

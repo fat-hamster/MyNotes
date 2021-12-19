@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 public class MainFragment extends Fragment {
 
     @Override
@@ -21,6 +24,11 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         setHasOptionsMenu(true);
+
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(view1 ->
+                Snackbar.make(view1, "Вызван по нажатию FloatingActionButton", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show());
 
         return view;
     }
@@ -34,7 +42,7 @@ public class MainFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.action_add) {
-            Toast.makeText(getContext(), "Choosen Add", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Chosen Add", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
