@@ -4,6 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout-land/activity_main.xml" value="0.22135416666666666" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout-land/content_main.xml" value="0.2630208333333333" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/activity_main.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/app_bar_layout.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/fragment_settings.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/layout/nav_header_layout.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/menu/main.xml" value="0.278125" />
+        <entry key="..\:/geekbrains-learning/MyNotes/app/src/main/res/menu/main_drawer.xml" value="0.278125" />
       </map>
     </option>
   </component>
