@@ -7,18 +7,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -28,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements Config{
     static Notes notes = new Notes();
     static int currentNote = 0;
     private DrawerLayout drawer_layout;
-    //private FrameLayout settings_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +39,7 @@ public class MainActivity extends AppCompatActivity implements Config{
         else
             currentNote = savedInstanceState.getInt(CURRENT_NOTE);
 
-        //settings_container = findViewById(R.id.settings_container);
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            //settings_container.setVisibility(View.INVISIBLE);
             getSupportFragmentManager().popBackStack();
         }
 
@@ -100,19 +92,8 @@ public class MainActivity extends AppCompatActivity implements Config{
     }
 
     private void runSettings() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.addToBackStack(null);
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            transaction.replace(R.id.list_notes_fragment_container, new SettingsFragment());
-        } else {
-            //settings_container.setVisibility(View.VISIBLE);
-            LinearLayout linearLayout = findViewById(R.id.main_container_land);
-            FrameLayout frameLayout = new FrameLayout(this);
-            linearLayout.addView(frameLayout);
-            transaction.replace(frameLayout.getId(), new SettingsFragment());
-        }
-        transaction.commit();
+        Intent settings = new Intent(this, SettingsActivity.class);
+        startActivity(settings);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -151,26 +132,6 @@ public class MainActivity extends AppCompatActivity implements Config{
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(CURRENT_NOTE, currentNote);
-    }
-
-    @Override
-    public void onBackPressed() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        OnBackPressedListener backPressedListener = null;
-        for(Fragment fragment: fragmentManager.getFragments()) {
-            if(fragment instanceof OnBackPressedListener) {
-                backPressedListener = (OnBackPressedListener) fragment;
-                break;
-            }
-        }
-
-        if(backPressedListener != null) {
-            backPressedListener.onBackPressed();
-            //if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-                //settings_container.setVisibility(View.INVISIBLE);
-        //} else {
-            super.onBackPressed();
-        }
     }
 
     private void initList() {

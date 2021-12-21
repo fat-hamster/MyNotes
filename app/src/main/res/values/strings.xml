@@ -11,5 +11,6 @@
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Settings</string>
+    <!--<string name="settings_text">Пробовал реализовать экран настроек через фрагмент, но возникли сложности в отображении в ландшафтной ориентации пришлось делать через активити</string>-->
+    <string name="settings_text">Settings</string>
 </resources>
