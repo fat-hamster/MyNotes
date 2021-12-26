@@ -1,5 +1,9 @@
 package com.example.mynotes;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements Config{
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.list_notes_fragment_container, new ListNotesFragment())
+                .replace(R.id.list_notes_fragment_container, new ListNotesFragment())
                 .commit();
     }
 
@@ -135,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements Config{
     }
 
     private void initList() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             int line = i + 1;
             notes.add("Line " + line, "Основные причины подорожания ремонта машин – " +
                     "это неизбежный рост цен на запчасти, а также на сами услуги.");
