@@ -1,11 +1,13 @@
 package com.example.mynotes;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,12 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 public class NoteBody extends Fragment implements Config{
     Note note = null;
+    TextView body;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,8 +57,8 @@ public class NoteBody extends Fragment implements Config{
 
         TextView titleView = view.findViewById(R.id.note_title_view);
         titleView.setText(note.getTitle());
-        TextView tv = view.findViewById(R.id.note_body_view);
-        tv.setText(note.getBody());
+        body = view.findViewById(R.id.note_body_view);
+        body.setText(note.getBody());
     }
 
     @Override
@@ -81,6 +81,17 @@ public class NoteBody extends Fragment implements Config{
     private void editBody() {
         Intent intent = new Intent(getContext(), EditNoteActivity.class);
         intent.putExtra(Config.CURRENT_NOTE, MainActivity.notes.getBody(MainActivity.currentNote));
-        startActivity(intent);
+        startForResult.launch(intent);
     }
+
+    ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == Activity.RESULT_OK) {
+                    Intent intent = result.getData();
+                    assert intent != null;
+                    String editBody = intent.getStringExtra(Config.CURRENT_NOTE);
+                    MainActivity.notes.getNote(MainActivity.currentNote).setBody(editBody);
+                    body.setText(editBody);
+                }
+            });
 }

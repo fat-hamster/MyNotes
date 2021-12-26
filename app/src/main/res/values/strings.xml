@@ -14,4 +14,6 @@
     <!--<string name="settings_text">Пробовал реализовать экран настроек через фрагмент, но возникли сложности в отображении в ландшафтной ориентации пришлось делать через активити</string>-->
     <string name="settings_text">Settings</string>
     <string name="edit">Edit</string>
+    <string name="back">Back</string>
+    <string name="save_body">Save</string>
 </resources>
