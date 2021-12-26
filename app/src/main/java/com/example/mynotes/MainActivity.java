@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements Config{
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.list_notes_fragment_container, new ListNotesFragment())
+                .replace(R.id.list_notes_fragment_container, new ListNotesFragment())
                 .commit();
     }
 
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements Config{
     }
 
     private void initList() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             int line = i + 1;
             notes.add("Line " + line, "Основные причины подорожания ремонта машин – " +
                     "это неизбежный рост цен на запчасти, а также на сами услуги.");
