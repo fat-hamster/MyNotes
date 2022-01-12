@@ -14,4 +14,10 @@
         android:title="@string/search"
         app:showAsAction="ifRoom"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:orderInCategory="90"
+        android:title="@string/edit"
+        app:showAsAction="ifRoom" />
 </menu>

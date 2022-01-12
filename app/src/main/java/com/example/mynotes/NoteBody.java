@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,10 +61,14 @@ public class NoteBody extends Fragment implements Config{
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.body_edit, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        MenuItem edit = menu.findItem(R.id.action_edit);
+        MenuItem search = menu.findItem(R.id.action_search);
+        MenuItem add = menu.findItem(R.id.action_add);
+        edit.setVisible(true);
+        search.setVisible(false);
+        add.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override
