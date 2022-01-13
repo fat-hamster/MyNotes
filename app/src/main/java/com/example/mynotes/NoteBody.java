@@ -63,11 +63,9 @@ public class NoteBody extends Fragment implements Config{
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         MenuItem edit = menu.findItem(R.id.action_edit);
-        MenuItem search = menu.findItem(R.id.action_search);
         MenuItem add = menu.findItem(R.id.action_add);
-        edit.setVisible(true);
-        search.setVisible(false);
-        add.setVisible(false);
+        edit.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        add.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         super.onPrepareOptionsMenu(menu);
     }
 

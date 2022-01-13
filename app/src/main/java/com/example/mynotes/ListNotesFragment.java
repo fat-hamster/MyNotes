@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListNotesFragment extends Fragment implements Config {
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,10 +42,10 @@ public class ListNotesFragment extends Fragment implements Config {
             MainActivity.currentNote = savedInstanceState.getInt(CURRENT_NOTE);
         }
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycle_view_lines);
+        recyclerView = view.findViewById(R.id.recycle_view_lines);
         recyclerView.setAdapter(new NotesListAdaptor(MainActivity.notes, (view1, position) -> showNote(position)));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        initList(view);
+
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             noteLandDetails(MainActivity.currentNote);
     }
@@ -53,7 +54,7 @@ public class ListNotesFragment extends Fragment implements Config {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
         MenuItem edit = menu.findItem(R.id.action_edit);
-        edit.setVisible(false);
+        edit.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         MenuItem search = menu.findItem(R.id.action_search);
         SearchView searchText = (SearchView) search.getActionView();
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -71,6 +72,14 @@ public class ListNotesFragment extends Fragment implements Config {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(MainActivity.currentNote != 0) {
+            recyclerView.getLayoutManager().scrollToPosition(MainActivity.currentNote);
+        }
+    }
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -82,27 +91,10 @@ public class ListNotesFragment extends Fragment implements Config {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void initList(View view) {
-//        LinearLayout linearLayout = view.findViewById(R.id.list_linear_layout);
-//        for (int i = 0; i < MainActivity.notes.getSize(); i++) {
-//            TextView tv = new TextView(getContext());
-//            tv.setTextSize(24);
-//            tv.setText(MainActivity.notes.getTitle(i));
-//            final int index = i;
-//            tv.setOnClickListener(v -> showNote(index));
-//            linearLayout.addView(tv);
-//        }
-//    }
-
-
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         MenuItem edit = menu.findItem(R.id.action_edit);
-        MenuItem search = menu.findItem(R.id.action_search);
-        MenuItem add = menu.findItem(R.id.action_add);
-        edit.setVisible(false);
-        search.setVisible(true);
-        add.setVisible(true);
+        edit.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         super.onPrepareOptionsMenu(menu);
     }
 
